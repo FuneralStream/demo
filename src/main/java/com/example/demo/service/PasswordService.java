@@ -9,8 +9,12 @@ import java.util.Random;
 
 @Service
 public class PasswordService {
+    private final PasswordRepository passwordRepository;
+
     @Autowired
-    private PasswordRepository passwordRepository;
+    public PasswordService(PasswordRepository passwordRepository) {
+        this.passwordRepository = passwordRepository;
+    }
 
     public void generateAndSavePasswords() {
         for (int i = 0; i < 100; i++) {
