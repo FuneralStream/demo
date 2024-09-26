@@ -2,19 +2,16 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Password;
 import com.example.demo.repository.PasswordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class PasswordService {
     private final PasswordRepository passwordRepository;
-
-    @Autowired
-    public PasswordService(PasswordRepository passwordRepository) {
-        this.passwordRepository = passwordRepository;
-    }
 
     public void generateAndSavePasswords() {
         for (int i = 0; i < 100; i++) {
@@ -33,5 +30,9 @@ public class PasswordService {
             password.append(characters.charAt(randomIndex));
         }
         return password.toString();
+    }
+
+    public List<Password> getAllPasswords() {
+        return passwordRepository.findAll();
     }
 }
